@@ -9,7 +9,7 @@ y = [1,2,5,3,7,2,9]
 X = [[1,1,1,1,1,1,1],[1,2,3,4,5,6,7],[4,3,2,1,0,9,8],[6,2,5,8,9,2,5],[8,5,2,7,4,2,5]]
 
 def ols(y,X):
-    print(backsub(mgs(y,X)))
+    return backsub(mgs(y,X))
 
 def mgs(y,X):
     X.insert(0,y)
@@ -33,4 +33,4 @@ def backsub(R):
     return coeffs
     
 if __name__== "__main__":
-    ols(y,X)
+    print(ols(y,X))
