@@ -2,7 +2,7 @@
     Rae Tiffen
     A minimal OLS algorithm using Modified Gram-Schmidt
 
-    Outputs a list of estimates from inputs y, X
+    Outputs a list of estimated coefficients from inputs y, X
 """
 
 y = [1,2,5,3,7,2,9]
