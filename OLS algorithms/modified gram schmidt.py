@@ -1,6 +1,7 @@
 """
     Rae Tiffen
-    A minimal OLS algorithm using Modified Gram-Schmidt
+
+    An OLS algorithm using modified Gram-Schmidt
 
     Outputs a list of estimated coefficients from inputs y, X
 """
@@ -16,8 +17,9 @@ def mgs(y,X):
     n = len(X[0])
     R = {i: [] for i in range(len(X)-1)}
     for p in reversed(range(len(X))):
+        ptp = sum(i**2 for i in X[p])
         for j in range(p):
-            c = sum(X[p][i]*X[j][i] for i in range(n)) / sum(i**2 for i in X[p])
+            c = sum(X[p][i]*X[j][i] for i in range(n)) / ptp
             R[p-1].append(c)
             X[j] = list(X[j][i] - X[p][i]*c for i in range(n))
     return R

@@ -1,0 +1,43 @@
+"""
+    Rae Tiffen
+
+    A ridge regression algorithm which regresses X'y on (X'X + lambda*I) using modified Gram-Schmidt
+
+    Outputs a list of estimated coefficients from inputs y, X
+"""
+
+y = [1,2,5,3,7,2,9]
+X = [[1,1,1,1,1,1,1],[1,2,3,4,5,6,7],[4,3,2,1,0,9,8],[6,2,5,8,9,2,5],[8,5,2,7,4,2,5]]
+lmb = 0.5
+
+def ridge(y,X,lmb):
+    Xty = [sum(y[j]*i[j] for j in range(len(i))) for i in X]
+    XtX = [[sum(X[i][k]*X[j][k] for k in range(len(X[i]))) for j in range(len(X))] for i in range(len(X))]
+    for i in range(len(X)):
+        XtX[i][i] += lmb
+    return backsub(mgs(Xty,XtX))
+
+def mgs(y,X):
+    X.insert(0,y)
+    n = len(X[0])
+    R = {i: [] for i in range(len(X)-1)}
+    for p in reversed(range(len(X))):
+        ptp = sum(i**2 for i in X[p])
+        for j in range(p):
+            c = sum(X[p][i]*X[j][i] for i in range(n)) / ptp
+            R[p-1].append(c)
+            X[j] = list(X[j][i] - X[p][i]*c for i in range(n))
+    return R
+
+def backsub(R):
+    coeffs = []
+    p = len(R)
+    for i in range(p):
+        b = R[i][0]
+        for j in range(len(R[i])-1):
+            b -= R[i][j+1]*coeffs[j]
+        coeffs.append(b)
+    return coeffs
+    
+if __name__== "__main__":
+    print(ridge(y,X,lmb))

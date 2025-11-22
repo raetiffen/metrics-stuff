@@ -1,7 +1,8 @@
 """
     Rae Tiffen
-    A minimal OLS algorithm using recursive FWL decompositions, defined in my thesis: https://scholarworks.uvm.edu/castheses/161/
-    This is a heavily simplified version of the algorithm presented in: https://github.com/raetiffen/recursivefwl/blob/main/recursivefwl.py
+
+    An OLS algorithm using recursive FWL decompositions, defined in my thesis: https://scholarworks.uvm.edu/castheses/161/
+    This is a simplified version of the algorithm presented in: https://github.com/raetiffen/recursivefwl/blob/main/recursivefwl.py
 
     Outputs a list of estimated coefficients from inputs y, X
 """
