@@ -1,7 +1,7 @@
 """
     Rae Tiffen
 
-    A ridge regression algorithm which appends lambda*I to the bottom of X and solves with modified Gram-Schmidt
+    A ridge regression algorithm which appends sqrt(lambda)*I to the bottom of X and solves with modified Gram-Schmidt
 
     Outputs a list of estimated coefficients from inputs y, X
 """
