@@ -10,7 +10,7 @@ y = [[1,2,5,3,7,2,9]]
 X = [[1,1,1,1,1,1,1],[1,2,3,4,5,6,7],[4,3,2,1,0,9,8],[6,2,5,8,9,2,5],[8,5,2,7,4,2,5]]
 lmb = 0.5
 
-def ols(y,X):
+def ridge(y,X):
     XtX = matmult(transpose(X),X)
     Xty = matmult(transpose(X),y)
     for i in range(len(XtX)):
@@ -49,4 +49,4 @@ def matadd(A,B):
     return [[A[i][j] + B[i][j] for j in range(len(A[0]))] for i in range(len(A))]
 
 if __name__== "__main__":
-    print(ols(transpose(y),transpose(X)))
+    print(ridge(transpose(y),transpose(X)))
