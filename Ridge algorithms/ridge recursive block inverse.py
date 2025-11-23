@@ -30,11 +30,10 @@ def block_inverse(M):
     top_left = matadd(Ainv, scalarmult(matmult(matmult(Ainv,b),matmult(c,Ainv)), Sinv[0][0]))
     top_right = scalarmult(matmult(Ainv,b),-Sinv[0][0])
     bottom_left = scalarmult(matmult(c,Ainv),-Sinv[0][0])
-    bottom_right = Sinv
     Minv = []
     for i in range(len(top_left)):
         Minv.append(top_left[i] + top_right[i])
-    Minv.append(bottom_left[0] + bottom_right[0])
+    Minv.append(bottom_left[0] + Sinv[0])
     return Minv
 
 def transpose(A):
