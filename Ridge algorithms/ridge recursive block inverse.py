@@ -1,17 +1,20 @@
 """
     Rae Tiffen
 
-    An OLS algorithm which inverts X'X directly by recursively applying the block matrix inverse formula
+    A ridge regression algorithm which inverts (X'X + lambda*I) directly by recursively applying the block matrix inverse formula
 
     Outputs a list of estimated coefficients from inputs y, X
 """
 
 y = [[1,2,5,3,7,2,9]]
 X = [[1,1,1,1,1,1,1],[1,2,3,4,5,6,7],[4,3,2,1,0,9,8],[6,2,5,8,9,2,5],[8,5,2,7,4,2,5]]
+lmb = 0.5
 
 def ols(y,X):
     XtX = matmult(transpose(X),X)
     Xty = matmult(transpose(X),y)
+    for i in range(len(XtX)):
+        XtX[i][i] += lmb
     beta = matmult(block_inverse(XtX),Xty)
     return transpose(beta)[0]
 
