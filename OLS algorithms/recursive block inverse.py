@@ -1,16 +1,9 @@
 """
     Rae Tiffen
 
-    No idea if this will work, but might as well try
+    An OLS algorithm which inverts X'X directly by recursively applying the block matrix inverse formula.
 
-    Note: The input notation for this is different than my other OLS algorithms. Here, X[i][j] is the element in the ith row and jth column of X. That is, X is a list of lists, where each list is a row (in other algorithms it's a column). Below I use the same example y and X as in the other algorithms (where each list is a column/variable), I simply transpose them when calling the OLS function.
-"""
-
-"""
-    let A be an m by n matrix
-    len(A) is the number of rows
-    len(A[0]) is the number of columns, assuming all rows have same number of entries (it must)
-    A[i][j] gets the element in the ith row and jth column
+    Outputs a list of estimated coefficients from inputs y, X
 """
 
 y = [[1,2,5,3,7,2,9]]
@@ -32,28 +25,26 @@ def ols(y,X):
     XtX = matmult(transpose(X),X)
     Xty = matmult(transpose(X),y)
     beta = matmult(block_inverse(XtX),Xty)
-    return beta
+    return transpose(beta)[0]
 
 def block_inverse(M):
-    # Base case: if M is 1x1, return M inverse
-    if len(M) == 1: # and len(M[0]) == 1:
+    if len(M) == 1:
         return [[(M[0][0])**(-1)]]
-    # Break apart M in to A, b, c, d
     A = [[M[i][j] for j in range(len(M[0])-1)] for i in range(len(M)-1)]
     b = [[M[i][-1]] for i in range(len(M)-1)]
     c = [[M[-1][j] for j in range(len(M[0])-1)]]
     d = [[M[-1][-1]]]
-    # Recursive call goes here
     Ainv = block_inverse(A)
-    # Get inverse schur complement
     Sinv = [[matadd(d,scalarmult(matmult(matmult(c,Ainv),b),-1))[0][0]**(-1)]]
-    # Construct matrix to pass back up
-    top_left = matadd(Ainv, scalarmult(matmult(matmult(Ainv,b),matmult(c,Ainv)), -Sinv[0][0]))
+    top_left = matadd(Ainv, scalarmult(matmult(matmult(Ainv,b),matmult(c,Ainv)), Sinv[0][0]))
     top_right = scalarmult(matmult(Ainv,b),-Sinv[0][0])
     bottom_left = scalarmult(matmult(c,Ainv),-Sinv[0][0])
     bottom_right = Sinv
-
-    return
+    Minv = []
+    for i in range(len(top_left)):
+        Minv.append(top_left[i] + top_right[i])
+    Minv.append(bottom_left[0] + bottom_right[0])
+    return Minv
 
 if __name__== "__main__":
     print(ols(transpose(y),transpose(X)))
