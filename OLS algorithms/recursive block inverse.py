@@ -4,6 +4,10 @@
     An OLS algorithm which inverts X'X directly by recursively applying the block matrix inverse formula
 
     Outputs a list of estimated coefficients from inputs y, X
+
+    A note about the limitations of this algorithm:
+        - This recursive block inverse algorithm requires that all diagonal entries be non-zero and that all possible top-left-most square submatrices be invertible. This is because the algorithm works by iteratively chipping off the right-most column and bottom-most row with the block inverse formula: what remains to invert is the top-left submatrix (which therefore must be invertible) and the bottom-right entry (a scalar, so cannot be zero).
+        - In the case of OLS this is not a problem, as all variables have non-zero variances (non-zero diagonal entries) and no set of variables are perfectly collinear (all top-left-most submatrices are invertible).
 """
 
 y = [[1,2,5,3,7,2,9]]

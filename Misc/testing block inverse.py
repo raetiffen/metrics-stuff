@@ -20,6 +20,7 @@ def test(n):
     times_block = []
     for m in range(2,n+1):
         # make a random square matrix with numpy, tolist for block inverse
+        # use an XtX-like matrix to ensure that the inverse block method works
         X = np.random.randint(-10,10, size=(m+100,m))
         mat = X.T @ X
         mat2 = mat.tolist()
