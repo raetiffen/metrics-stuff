@@ -11,5 +11,6 @@ Ridge:
 * [Ridge regression algorithm which inverts (X'X + lambda*I) directly by recursively applying the block matrix inverse formula](</Ridge algorithms/ridge recursive block inverse.py>)
 
 Misc:
+* [OLS estimation lecture slides](<Misc/ols estimation slides.pdf>)
 * [A cool curve generator that fits successive powers of t to normally-distributed data](<Misc/perfect fit.py>)
 * [A comparison of the recursive block inverse algorithm with numpy's linalg.inv function](</Misc/testing block inverse.py>)
