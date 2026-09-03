@@ -13,5 +13,6 @@ Ridge:
 Misc:
 * [OLS estimation lecture slides](<Misc/ols estimation slides.pdf>)
 * [OLS theory lecture notes](<Misc/ols notes.pdf>)
+* [Panel data lecture slides](<Misc/panel data slides.pdf>)
 * [A cool curve generator that fits successive powers of t to normally-distributed data](<Misc/perfect fit.py>)
 * [A comparison of the recursive block inverse algorithm with numpy's linalg.inv function](</Misc/testing block inverse.py>)
